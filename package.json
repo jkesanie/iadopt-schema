@@ -1,0 +1,22 @@
+{
+  "name": "schema",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/testShacl.js",
+  "type": "module",
+  "scripts": {
+    "schema": "node --no-warnings src/testSchema.js",
+    "shacl": "node --no-warnings src/testShacl.js",
+    "validate": "node --no-warnings src/externalValidate.js"
+  },
+  "keywords": [],
+  "author": "Sirko Schindler",
+  "license": "MIT",
+  "dependencies": {
+    "@zazuko/env-node": "^2.1.3",
+    "ajv": "^8.17.1",
+    "cli-color": "^2.0.4",
+    "globals": "^15.9.0",
+    "rdf-validate-shacl": "^0.5.5"
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "@context": {
+    "@version": 1.1,
+
+    "label": "http://www.w3.org/2000/01/rdf-schema#label",
+
+    "property": {
+      "@id": "https://w3id.org/iadopt/ont/hasProperty",
+      "@type": "@id"
+    },
+
+    "ooi": {
+      "@id": "https://w3id.org/iadopt/ont/hasObjectOfInterest",
+      "@type": "@id"
+    },
+    "objectofinterest": {
+      "@id": "https://w3id.org/iadopt/ont/hasObjectOfInterest",
+      "@type": "@id"
+    },
+
+    "matrix": {
+      "@id": "https://w3id.org/iadopt/ont/hasMatrix",
+      "@type": "@id"
+    },
+
+    "context": {
+      "@id": "https://w3id.org/iadopt/ont/hasContextObject",
+      "@type": "@id"
+    },
+    "contextobject": {
+      "@id": "https://w3id.org/iadopt/ont/hasContextObject",
+      "@type": "@id"
+    },
+
+    "constraint": {
+      "@id":    "https://w3id.org/iadopt/ont/hasConstraint",
+
+      "@context": {
+        "constrains": {
+          "@id": "https://w3id.org/iadopt/ont/constrains",
+          "@type": "@id"
+        }
+      }
+    }
+
+  }
+}

@@ -1,0 +1,20 @@
+@prefix dash:    <http://datashapes.org/dash#> .
+@prefix graphql: <http://datashapes.org/graphql#> .
+@prefix iadopt:  <https://w3id.org/iadopt/ont/> .
+@prefix nercP01: <http://vocab.nerc.ac.uk/collection/P01/current/> .
+@prefix nercS06: <http://vocab.nerc.ac.uk/collection/S06/current/> .
+@prefix nercS12: <http://vocab.nerc.ac.uk/collection/S12/current/> .
+@prefix nercS27: <http://vocab.nerc.ac.uk/collection/S27/current/> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh:      <http://www.w3.org/ns/shacl#> .
+@prefix shape:   <https://w3id.org/iadopt/shacl/> .
+@prefix swa:     <http://topbraid.org/swa#> .
+@prefix tosh:    <http://topbraid.org/tosh#> .
+@prefix worms:   <http://marinespecies.org/aphia.php?p=taxdetails&id=> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+
+[ rdf:type     sh:ValidationReport;
+  sh:conforms  true
+] .

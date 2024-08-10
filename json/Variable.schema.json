@@ -1,0 +1,117 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+
+  "$defs": {
+
+    "entity": {
+      "@type":  "object",
+      "@id":    "string",
+      "required": [ "@id" ]
+    },
+
+    "constraint": {
+      "type": "object",
+      "properties": {
+        "constrains": {
+          "@type": "string"
+        },
+        "@type": {
+          "description": "Type definition has to include iadopt:Constraint.",
+          "type": [ "string", "array" ],
+          "items": {
+            "type": "string"
+          },
+          "contains": {
+            "const": "https://w3id.org/iadopt/ont/Constraint"
+          },
+          "pattern": "https://w3id.org/iadopt/ont/Constraint"
+        }
+      },
+      "required": [ "constrains" ]
+    }
+  },
+
+  "type": "object",
+  "properties": {
+
+    "@context": {
+      "description": "Context for an I-Adopt Variable is fixed.",
+      "const": "https://w3id.org/iadopt/Variable.context.jsonld"
+    },
+    "@id":   { "type": "string" },
+    "@type": {
+      "description": "Type definition has to include iadopt:Variable.",
+      "type": [ "string", "array" ],
+      "items": {
+        "type": "string"
+      },
+      "contains": {
+        "const": "https://w3id.org/iadopt/ont/Variable"
+      },
+      "pattern": "https://w3id.org/iadopt/ont/Variable"
+    },
+
+    "property":         { "$ref": "#/$defs/entity" },
+    "ooi":              { "$ref": "#/$defs/entity" },
+    "objectofinterest": { "$ref": "#/$defs/entity" },
+    "matrix":           { "$ref": "#/$defs/entity" },
+    "context": {
+      "description": "contextObject can either be a single entity or an array of entities",
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/entity"
+          }
+        },
+        { "$ref": "#/$defs/entity" }
+      ]
+    },
+    "contextobject": {
+      "description": "contextObject can either be a single entity or an array of entities",
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/entity"
+          }
+        },
+        { "$ref": "#/$defs/entity" }
+      ]
+    },
+    "constraint": {
+      "description": "constraint can either be a single Constraint or an array of Constraints",
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/constraint"
+          }
+        },
+        { "$ref": "#/$defs/constraint" }
+      ]
+    }
+
+
+  },
+
+  "allOf": [{
+      "required": [ "@context", "@id", "@type", "property" ]
+    }, {
+      "oneOf": [
+        { "required": ["context"] },
+        { "required": ["contextobject"] },
+        { "properties": {
+            "context":       { "not": {} },
+            "contextobject": { "not": {} }
+          }
+        }
+      ]
+    }, {
+      "oneOf": [
+        { "required": ["ooi"] },
+        { "required": ["objectofinterest"] }
+      ]
+  }]
+
+}

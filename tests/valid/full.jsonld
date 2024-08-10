@@ -1,0 +1,33 @@
+{
+  "@context": "https://w3id.org/iadopt/Variable.context.jsonld",
+  "@id": "http://vocab.nerc.ac.uk/collection/P01/current/IC000344/",
+  "@type": "https://w3id.org/iadopt/ont/Variable",
+  "label": "concentration of endosulfane sulfate in wet flesh of ostrea edulis",
+
+  "property": {
+    "@id": "http://vocab.nerc.ac.uk/collection/S06/current/S0600045/",
+    "label": "concentration"
+  },
+
+  "ooi": {
+    "@id": "http://vocab.nerc.ac.uk/collection/S27/current/CS003625/",
+    "label": "endosulfane sulfate"
+  },
+
+  "matrix": {
+    "@id": "http://vocab.nerc.ac.uk/collection/S12/current/S1214/",
+    "label": "flesh"
+  },
+
+  "context": [{
+    "@id": "http://marinespecies.org/aphia.php?p=taxdetails&id=140658",
+    "label": "ostrea edulis"
+  }],
+
+  "constraint": [{
+    "@type": [ "https://w3id.org/iadopt/ont/Constraint", "http://purl.obolibrary.org/obo/PATO_0001823" ],
+    "label": "wet",
+    "constrains": [ "http://vocab.nerc.ac.uk/collection/S12/current/S1214/" ]
+  }]
+
+}

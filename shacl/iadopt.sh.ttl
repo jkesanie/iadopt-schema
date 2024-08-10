@@ -1,0 +1,99 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix iadopt: <https://w3id.org/iadopt/ont/> .
+@prefix shape: <https://w3id.org/iadopt/shacl/> .
+
+shape:VariableShape
+  a sh:NodeShape ;
+  sh:targetClass iadopt:Variable ;
+  sh:closed false ;
+
+  sh:property [
+    sh:message "Variable needs to have exactly one Property." ;
+    sh:path iadopt:hasProperty ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:nodeKind sh:IRI ;
+  ] ;
+
+  sh:property [
+    sh:message "Variable needs to have exactly one ObjectOfInterest." ;
+    sh:path iadopt:hasObjectOfInterest ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:nodeKind sh:IRI ;
+  ] ;
+
+  sh:property [
+    sh:message "Variable can have up to one Matrix." ;
+    sh:path iadopt:hasMatrix ;
+    sh:minCount 0 ;
+    sh:maxCount 1 ;
+    sh:nodeKind sh:IRI ;
+  ] ;
+
+  sh:property [
+    sh:message "All ContextObjects of a Variable have to be entities." ;
+    sh:path iadopt:hasContextObject ;
+    sh:minCount 0 ;
+    sh:nodeKind sh:IRI ;
+  ] ;
+
+  sh:property [
+    sh:message "All Constraints of a Variable have to be entities." ;
+    sh:path iadopt:hasConstraint ;
+    sh:minCount 0 ;
+    sh:nodeKind sh:BlankNodeOrIRI ;
+  ] ;
+
+  sh:property [
+    sh:message "All Constraints of a Variable have to classified as such." ;
+    sh:path iadopt:hasConstraint ;
+    sh:class iadopt:Constraint ;
+  ] ;
+
+  .
+
+
+shape:ConstraintShape
+  a sh:NodeShape ;
+  sh:targetClass iadopt:Constraint ;
+  sh:closed false ;
+
+  sh:property [
+    sh:message "Constraint needs to be linked from at least one Variable." ;
+    sh:path [ sh:inversePath iadopt:hasConstraint ] ;
+    sh:minCount 1 ;
+    sh:nodeKind sh:IRI ;
+    sh:class iadopt:Variable ;
+  ] ;
+
+  sh:property [
+    sh:message "Constraint needs to constrain at least one entity." ;
+    sh:path iadopt:constrains ;
+    sh:minCount 1 ;
+    sh:nodeKind sh:IRI ;
+  ] ;
+
+  sh:sparql [
+    a sh:SPARQLConstraint ;
+    sh:message "Constraints of a Variable need to constraint only entities of the same Variable." ;
+    sh:declare [
+      sh:prefix "iadopt" ;
+      sh:namespace "https://w3id.org/iadopt/ont/"^^xsd:anyURI ;
+    ] ;
+    sh:prefixes iadopt: ;
+    sh:select """
+      PREFIX iadopt: <https://w3id.org/iadopt/ont/>
+      SELECT $this ?constrained
+      WHERE {
+        ?var iadopt:hasConstraint $this .
+        $this iadopt:constrains ?constrained .
+        FILTER NOT EXISTS { ?va (iadopt:hasObjectOfInteres|iadopt:hasMatrix|iadopt:hasContextObject) ?constrained }
+      }
+      """ ;
+  ] ;
+
+  .

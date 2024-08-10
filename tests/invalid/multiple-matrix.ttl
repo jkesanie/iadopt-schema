@@ -1,0 +1,31 @@
+@prefix nercP01: <http://vocab.nerc.ac.uk/collection/P01/current/> .
+@prefix nercS06: <http://vocab.nerc.ac.uk/collection/S06/current/> .
+@prefix nercS12: <http://vocab.nerc.ac.uk/collection/S12/current/> .
+@prefix nercS27: <http://vocab.nerc.ac.uk/collection/S27/current/> .
+@prefix iadopt: <https://w3id.org/iadopt/ont/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+
+nercS06:S0600045
+  rdfs:label "concentration"@en ;
+  .
+
+nercS27:CS003625
+  rdfs:label "endosulfane sulfate"@en ;
+  .
+
+nercS12:S1214
+  rdfs:label "flesh"@en ;
+  .
+
+nercS12:S1215
+  rdfs:label "coccoliths"@en ;
+  .
+
+nercP01:IC000344
+  a           iadopt:Variable ;
+  rdfs:label  "concentration of endosulfane sulfate in wet flesh of ostrea edulis"@en ;
+  iadopt:hasObjectOfInterest  nercS27:CS003625 ;
+  iadopt:hasProperty          nercS06:S0600045 ;
+  iadopt:hasMatrix            nercS12:S1214, nercS12:S1215 ;
+  .

@@ -5,11 +5,13 @@
   "label": "concentration of endosulfane sulfate in wet flesh of ostrea edulis",
 
   "property": {
+    "@type": [ "https://w3id.org/iadopt/ont/Property" ],
     "@id": "http://vocab.nerc.ac.uk/collection/S06/current/S0600045/",
     "label": "concentration"
   },
 
   "ooi": {
+    "@type": [ "https://w3id.org/iadopt/ont/Entity" ],
     "@id": "http://vocab.nerc.ac.uk/collection/S06/current/S0600045/",
     "label": "endosulfane sulfate"
   }

@@ -8,18 +8,22 @@
 
 
 nercS06:S0600045
+  a          iadopt:Property ;
   rdfs:label "concentration"@en ;
   .
 
 nercS27:CS003625
+  a          iadopt:Entity ;
   rdfs:label "endosulfane sulfate"@en ;
   .
 
 nercS12:S1214
+  a          iadopt:Entity ;
   rdfs:label "flesh"@en ;
   .
 
 worms:140658
+  a          iadopt:Entity ;
   rdfs:label "ostrea edulis"@en ;
   .
 

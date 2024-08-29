@@ -6,6 +6,7 @@
 
 
 nercS27:CS003625
+  a          iadopt:Entity ;
   rdfs:label "endosulfane sulfate"@en ;
   .
 

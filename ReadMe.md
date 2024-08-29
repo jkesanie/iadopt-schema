@@ -17,15 +17,15 @@ See [`tests/valid`](./tests/valid/) for valid examples for JSON-LD-encoded Varia
 
 **Variable**
 
-| Requirement                                                   | SHACL | JSON-Schema |
-|---------------------------------------------------------------|:-----:|:-----------:|
-| `Variable` needs to have an identifier.                       |   ✗   |      ✓      |
-| `Variable` needs to have exactly one `Property`.              |   ✓   |      ✓      |
-| `Variable` needs to have exactly one `ObjectOfInterest`.      |   ✓   |      ✓      |
-| `Variable` can have up to one `Matrix`.                       |   ✓   |      ✓      |
-| All `ContextObject`s of a `Variable` have to be entities.     |   ✓   |      ✓      |
-| All `Constraint`s of a `Variable` have to be entities.        |   ✓   |      ✓      |
-| All `Constraints` of a `Variable` have to classified as such. |   ✓   |      ✓      |
+| Requirement                                                      | SHACL | JSON-Schema |
+|------------------------------------------------------------------|:-----:|:-----------:|
+| `Variable` needs to have an identifier.                          |   ✗   |      ✓      |
+| `Variable` needs to have exactly one `Property`.                 |   ✓   |      ✓      |
+| `Variable` needs to have exactly one `ObjectOfInterest`.         |   ✓   |      ✓      |
+| `Variable` can have up to one `Matrix`.                          |   ✓   |      ✓      |
+| All `ContextObject`s of a `Variable` have to be concepts.        |   ✓   |      ✓      |
+| All `Constraint`s of a `Variable` have to be concepts.           |   ✓   |      ✓      |
+| All `Constraints` of a `Variable` have to be classified as such. |   ✓   |      ✓      |
 
 **Constraint**
 

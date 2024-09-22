@@ -79,7 +79,7 @@ shape:ConstraintShape
 
   sh:sparql [
     a sh:SPARQLConstraint ;
-    sh:message "Constraints of a Variable need to constraint only entities of the same Variable." ;
+    sh:message "Constraints of a Variable need to constrain only entities of the same Variable." ;
     sh:declare [
       sh:prefix "iadopt" ;
       sh:namespace "https://w3id.org/iadopt/ont/"^^xsd:anyURI ;
@@ -91,7 +91,7 @@ shape:ConstraintShape
       WHERE {
         ?var iadopt:hasConstraint $this .
         $this iadopt:constrains ?constrained .
-        FILTER NOT EXISTS { ?va (iadopt:hasObjectOfInteres|iadopt:hasMatrix|iadopt:hasContextObject) ?constrained }
+        FILTER NOT EXISTS { ?var (iadopt:hasObjectOfInterest|iadopt:hasMatrix|iadopt:hasContextObject) ?constrained }
       }
       """ ;
   ] ;

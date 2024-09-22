@@ -3,6 +3,7 @@
     "@version": 1.1,
 
     "label": "http://www.w3.org/2000/01/rdf-schema#label",
+    "comment": "http://www.w3.org/2000/01/rdf-schema#comment",
 
     "property": {
       "@id": "https://w3id.org/iadopt/ont/hasProperty",

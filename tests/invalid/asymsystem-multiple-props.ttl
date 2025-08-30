@@ -1,0 +1,47 @@
+@prefix ex: <http://example.org/iadopt/> .
+@prefix iadopt: <https://w3id.org/iadopt/ont/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+
+ex:Variable
+  a           iadopt:Variable ;
+  rdfs:label  "Testing Variable"@en ;
+  iadopt:hasObjectOfInterest    ex:OoI ;
+  iadopt:hasProperty            ex:Prop ;
+  .
+
+
+ex:Prop
+  a          iadopt:Property ;
+  rdfs:label "property"@en ;
+  .
+
+ex:OoI
+  a                 iadopt:AsymmetricSystem ;
+  iadopt:hasSource  ex:SysSource ;
+  iadopt:hasTarget  ex:SysTarget ;
+  iadopt:hasNumerator     ex:SysNumerator ;
+  iadopt:hasDenominator   ex:SysDenominator ;
+  rdfs:label "object of interest - AsymmetricSystem"@en ;
+  .
+
+ex:SysSource
+  a          iadopt:Entity ;
+  rdfs:label "system source"@en ;
+  .
+
+ex:SysTarget
+  a          iadopt:Entity ;
+  rdfs:label "system target"@en ;
+  .
+
+ex:SysNumerator
+  a          iadopt:Entity ;
+  rdfs:label "system numerator"@en ;
+  .
+
+ex:SysDenominator
+  a          iadopt:Entity ;
+  rdfs:label "system denominator"@en ;
+  .
+

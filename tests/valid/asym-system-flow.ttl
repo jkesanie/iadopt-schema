@@ -8,10 +8,6 @@ ex:Variable
   rdfs:label  "Testing Variable"@en ;
   iadopt:hasObjectOfInterest    ex:OoI ;
   iadopt:hasProperty            ex:Prop ;
-  iadopt:hasConstraint [
-    a           iadopt:Constraint ;
-    rdfs:label  "constraint OoI"@en ;
-  ]
   .
 
 
@@ -21,6 +17,18 @@ ex:Prop
   .
 
 ex:OoI
+  a                 iadopt:AsymmetricSystem ;
+  iadopt:hasSource  ex:SysSource ;
+  iadopt:hasTarget  ex:SysTarget ;
+  rdfs:label "object of interest - AsymmetricSystem"@en ;
+  .
+
+ex:SysSource
   a          iadopt:Entity ;
-  rdfs:label "object of interest"@en ;
+  rdfs:label "system source"@en ;
+  .
+
+ex:SysTarget
+  a          iadopt:Entity ;
+  rdfs:label "system target"@en ;
   .

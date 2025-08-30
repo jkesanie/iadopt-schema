@@ -1,0 +1,183 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix iadopt: <https://w3id.org/iadopt/ont/> .
+@prefix shape: <https://w3id.org/iadopt/shacl/> .
+
+
+
+shape:VariableShape
+  sh:property [
+    sh:message "Variable should have a label." ;
+    sh:path rdfs:label ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+
+
+
+shape:VariableSetShape
+  sh:property [
+    sh:message "VariableSet should have a label." ;
+    sh:path rdfs:label ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  .
+
+
+
+shape:EntityShape
+  a sh:NodeShape ;
+  sh:targetClass iadopt:Entity ;
+  sh:closed false ;
+  sh:property [
+    sh:message "Entity need to have a label." ;
+    sh:path rdfs:label ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  sh:property [
+    sh:message "Entity can have a description." ;
+    sh:path rdfs:comment ;
+    sh:maxCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  .
+
+
+
+shape:PropertyShape
+  a sh:NodeShape ;
+  sh:targetClass iadopt:Property ;
+  sh:closed false ;
+  sh:property [
+    sh:message "Property need to have a label." ;
+    sh:path rdfs:label ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  sh:property [
+    sh:message "Property can be linked from Variables." ;
+    sh:path [ sh:inversePath iadopt:hasProperty ] ;
+    sh:minCount 0 ;
+    sh:nodeKind sh:IRI ;
+    sh:class iadopt:Variable ;
+  ] ;
+  .
+
+
+
+shape:StatisticalModifierShape
+  a sh:NodeShape ;
+  sh:targetClass iadopt:StatisticalModifier ;
+  sh:closed false ;
+  sh:property [
+    sh:message "StatisticalModifier need to have a label." ;
+    sh:path rdfs:label ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  sh:property [
+    sh:message "StatisticalModifier can be linked from Variables." ;
+    sh:path [ sh:inversePath iadopt:hasStatisticalModifier ] ;
+    sh:minCount 0 ;
+    sh:nodeKind sh:IRI ;
+    sh:class iadopt:Variable ;
+  ] ;
+  .
+
+
+
+shape:ConstraintShape
+
+  sh:property [
+    sh:path iadopt:constrains ;
+    sh:minCount 1 ;
+    sh:nodeKind sh:IRI ;
+    sh:or (
+      [ sh:class iadopt:ObjectOfInterest ]
+      [ sh:class iadopt:Matrix ]
+      [ sh:class iadopt:ContextObject ]
+      [ sh:class iadopt:Property ]
+      [ sh:class iadopt:StatisticalModifier ]
+    ) ;
+    sh:message "Constraint must constrain one of the I-Adopt classes." ;
+  ] ;
+
+  sh:property [
+    sh:message "Constraint should have a label." ;
+    sh:path rdfs:label ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  .
+
+
+
+shape:SystemShape
+  sh:property [
+    sh:message "System should have a label." ;
+    sh:path rdfs:label ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+
+
+
+shape:SymmetricSystemShape
+  sh:property [
+    sh:message "SymmetricSystem should have a label." ;
+    sh:path rdfs:label ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+
+
+
+shape:SystemEntityIntegrationShape
+  a sh:NodeShape ;
+  sh:targetClass iadopt:Entity ;
+  sh:closed false ;
+  sh:property [
+    sh:message "Entity should have a label." ;
+    sh:path rdfs:label ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  .
+
+
+
+shape:DataQualityShape
+  a sh:NodeShape ;
+  sh:targetClass iadopt:Variable ;
+  sh:closed false ;
+  sh:property [
+    sh:message "Variable label should be at least 3 characters long." ;
+    sh:path rdfs:label ;
+    sh:minLength 3 ;
+  ] ;
+  .
+
+
+
+shape:VariableSetShape
+  a sh:NodeShape ;
+  sh:targetClass iadopt:VariableSet ;
+  sh:closed false ;
+  sh:property [
+    sh:message "VariableSet should contain at least one Variable." ;
+    sh:path iadopt:hasMember ;
+    sh:minCount 1 ;
+    sh:nodeKind sh:IRI ;
+    sh:class iadopt:Variable ;
+  ] ;
+  sh:property [
+    sh:message "VariableSet should have a label." ;
+    sh:path rdfs:label ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  .

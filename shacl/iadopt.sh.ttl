@@ -15,7 +15,7 @@ shape:VariableShape
     sh:path iadopt:hasProperty ;
     sh:minCount 1 ;
     sh:maxCount 1 ;
-    sh:nodeKind sh:IRI ;
+    sh:nodeKind sh:BlankNodeOrIRI ;
   ] ;
 
   sh:property [
@@ -23,7 +23,7 @@ shape:VariableShape
     sh:path iadopt:hasObjectOfInterest ;
     sh:minCount 1 ;
     sh:maxCount 1 ;
-    sh:nodeKind sh:IRI ;
+    sh:nodeKind sh:BlankNodeOrIRI ;
   ] ;
 
   sh:property [
@@ -31,30 +31,39 @@ shape:VariableShape
     sh:path iadopt:hasMatrix ;
     sh:minCount 0 ;
     sh:maxCount 1 ;
-    sh:nodeKind sh:IRI ;
+    sh:nodeKind sh:BlankNodeOrIRI ;
   ] ;
 
   sh:property [
-    sh:message "All ContextObjects of a Variable have to be entities." ;
+    sh:message "Variable can have an arbitrary number of up to one ContextObjects." ;
     sh:path iadopt:hasContextObject ;
     sh:minCount 0 ;
-    sh:nodeKind sh:IRI ;
+    sh:nodeKind sh:BlankNodeOrIRI ;
   ] ;
 
   sh:property [
-    sh:message "All Constraints of a Variable have to be entities." ;
+    sh:message "Variables can have up to one StatisticalModifier." ;
+    sh:path iadopt:hasStatisticalModifier ;
+    sh:minCount 0 ;
+    sh:maxCount 1 ;
+    sh:nodeKind sh:BlankNodeOrIRI ;
+  ] ;
+
+  sh:property [
+    sh:message "All Constraints of a Variable have to be concepts." ;
     sh:path iadopt:hasConstraint ;
     sh:minCount 0 ;
     sh:nodeKind sh:BlankNodeOrIRI ;
   ] ;
 
   sh:property [
-    sh:message "All Constraints of a Variable have to classified as such." ;
+    sh:message "All constraints of a `Variable` have to be instances of Constraint." ;
     sh:path iadopt:hasConstraint ;
     sh:class iadopt:Constraint ;
   ] ;
 
   .
+
 
 
 shape:ConstraintShape
@@ -91,9 +100,185 @@ shape:ConstraintShape
       WHERE {
         ?var iadopt:hasConstraint $this .
         $this iadopt:constrains ?constrained .
-        FILTER NOT EXISTS { ?var (iadopt:hasObjectOfInterest|iadopt:hasMatrix|iadopt:hasContextObject) ?constrained }
+        FILTER NOT EXISTS { ?var (iadopt:hasObjectOfInterest|iadopt:hasMatrix|iadopt:hasContextObject|iadopt:hasProperty|iadopt:hasStatisticalModifier) ?constrained }
       }
       """ ;
   ] ;
 
+  .
+
+
+
+shape:SystemShape
+  a sh:NodeShape ;
+  sh:targetClass iadopt:System ;
+  sh:closed false ;
+
+  sh:property [
+    sh:message "System class can not be used in isolation." ;
+    sh:path rdf:type ;
+    sh:minCount 1 ;
+    sh:or (
+      [ sh:class iadopt:SymmetricSystem ; ]
+      [ sh:class iadopt:AsymmetricSystem ; ]
+    ) ;
+  ] ;
+  .
+
+
+
+shape:SymmetricSystemShape
+  a sh:NodeShape ;
+  sh:targetClass iadopt:SymmetricSystem ;
+  sh:closed false ;
+
+  sh:property [
+    sh:message "SymmetricSystems can not be instances of AsymmetricSystem." ;
+    sh:path rdf:type ;
+    sh:not [
+      sh:hasValue iadopt:AsymmetricSystem ;
+    ]
+  ] ;
+
+  sh:property [
+    sh:message "SymmetricSystems can not use asymmetric properties." ;
+    sh:path [ sh:alternativePath (
+      iadopt:hasSource
+      iadopt:hasTarget
+      iadopt:hasNumerator
+      iadopt:hasDenominator
+    ) ];
+    sh:maxCount 0;
+  ] ;
+
+  sh:property [
+    sh:message "SymmetricSystems have to have at least two uses of hasPart." ;
+    sh:path iadopt:hasPart ;
+    sh:minCount 2 ;
+    sh:nodeKind sh:BlankNodeOrIRI ;
+  ] ;
+  .
+
+
+
+shape:AsymmetricSystemShape
+  a sh:NodeShape ;
+  sh:targetClass iadopt:AsymmetricSystem ;
+  sh:closed false ;
+
+  sh:property [
+    sh:message "AsymmetricSystems can not be instances of SymmetricSystem." ;
+    sh:path rdf:type ;
+    sh:not [
+      sh:hasValue iadopt:SymmetricSystem ;
+    ]
+  ] ;
+
+  sh:property [
+    sh:message "AsymmetricSystems can not use symmetric properties." ;
+    sh:path iadopt:hasPart ;
+    sh:maxCount 0;
+  ] ;
+
+  sh:property [
+    sh:message "AsymmetricSystems have to use at least two of the asymmetric properties." ;
+    sh:path [ sh:alternativePath (
+      iadopt:hasSource
+      iadopt:hasTarget
+      iadopt:hasNumerator
+      iadopt:hasDenominator
+    ) ];
+    sh:minCount 2;
+  ] ;
+
+  .
+
+
+shape:AsymmetricSystemShape_hasSource
+  a sh:NodeShape ;
+  sh:targetSubjectsOf iadopt:hasSource ;
+  sh:closed false ;
+
+  sh:property [
+    sh:message "Use of hasSource allows for only hasTarget but not other asymmetric properties." ;
+    sh:path [ sh:alternativePath (
+      iadopt:hasNumerator
+      iadopt:hasDenominator
+    ) ];
+    sh:maxCount 0;
+  ] ;
+
+  sh:property [
+    sh:message "Use of hasSource requires at least one use of hasTarget." ;
+    sh:path iadopt:hasTarget;
+    sh:minCount 1;
+  ] ;
+  .
+
+
+shape:AsymmetricSystemShape_hasTarget
+  a sh:NodeShape ;
+  sh:targetSubjectsOf iadopt:hasTarget ;
+  sh:closed false ;
+
+  sh:property [
+    sh:message "Use of hasTarget allows for only hasSource but not other asymmetric properties." ;
+    sh:path [ sh:alternativePath (
+      iadopt:hasNumerator
+      iadopt:hasDenominator
+    ) ];
+    sh:maxCount 0;
+  ] ;
+
+  sh:property [
+    sh:message "Use of hasTarget requires at least one use of hasSource." ;
+    sh:path iadopt:hasTarget;
+    sh:minCount 1;
+  ] ;
+  .
+
+
+shape:AsymmetricSystemShape_hasNumerator
+  a sh:NodeShape ;
+  sh:targetSubjectsOf iadopt:hasNumerator ;
+  sh:closed false ;
+
+  sh:property [
+    sh:message "Use of hasNumerator allows for only hasDenominator but not other asymmetric properties." ;
+    sh:path [ sh:alternativePath (
+      iadopt:hasSource
+      iadopt:hasTarget
+    ) ];
+    sh:maxCount 0;
+  ] ;
+
+  sh:property [
+    sh:message "Use of hasNumerator requires exactly one use of hasDenominator." ;
+    sh:path iadopt:hasDenominator;
+    sh:minCount 1;
+    sh:maxCount 1;
+  ] ;
+  .
+
+
+shape:AsymmetricSystemShape_hasDenominator
+  a sh:NodeShape ;
+  sh:targetSubjectsOf iadopt:hasDenominator ;
+  sh:closed false ;
+
+  sh:property [
+    sh:message "Use of hasDenominator allows for only hasNumerator but not other asymmetric properties." ;
+    sh:path [ sh:alternativePath (
+      iadopt:hasSource
+      iadopt:hasTarget
+    ) ];
+    sh:maxCount 0;
+  ] ;
+
+  sh:property [
+    sh:message "Use of hasDenominator requires exactly one use of hasNumerator." ;
+    sh:path iadopt:hasNumerator;
+    sh:minCount 1;
+    sh:maxCount 1;
+  ] ;
   .

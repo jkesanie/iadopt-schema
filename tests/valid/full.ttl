@@ -1,42 +1,61 @@
-@prefix nercP01: <http://vocab.nerc.ac.uk/collection/P01/current/> .
-@prefix nercS06: <http://vocab.nerc.ac.uk/collection/S06/current/> .
-@prefix nercS12: <http://vocab.nerc.ac.uk/collection/S12/current/> .
-@prefix nercS27: <http://vocab.nerc.ac.uk/collection/S27/current/> .
+@prefix ex: <http://example.org/iadopt/> .
 @prefix iadopt: <https://w3id.org/iadopt/ont/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix worms: <http://marinespecies.org/aphia.php?p=taxdetails&id=> .
 
 
-nercS06:S0600045
-  a          iadopt:Property ;
-  rdfs:label "concentration"@en ;
-  .
-
-nercS27:CS003625
-  a          iadopt:Entity ;
-  rdfs:label "endosulfane sulfate"@en ;
-  .
-
-nercS12:S1214
-  a          iadopt:Entity ;
-  rdfs:label "flesh"@en ;
-  .
-
-worms:140658
-  a          iadopt:Entity ;
-  rdfs:label "ostrea edulis"@en ;
-  .
-
-nercP01:IC000344
+ex:Variable
   a           iadopt:Variable ;
-  rdfs:label  "concentration of endosulfane sulfate in wet flesh of ostrea edulis"@en ;
-  iadopt:hasObjectOfInterest  nercS27:CS003625 ;
-  iadopt:hasProperty          nercS06:S0600045 ;
-  iadopt:hasMatrix            nercS12:S1214 ;
-  iadopt:hasContextObject     worms:140658 ;
+  rdfs:label  "Testing Variable"@en ;
+  iadopt:hasObjectOfInterest    ex:OoI ;
+  iadopt:hasProperty            ex:Prop ;
+  iadopt:hasMatrix              ex:Matrix ;
+  iadopt:hasContextObject       ex:Context ;
+  iadopt:hasStatisticalModifier ex:StatMod ;
   iadopt:hasConstraint [
     a           iadopt:Constraint ;
-    rdfs:label  "wet"@en ;
-    iadopt:constrains nercS12:S1214 ;
-  ] ;
+    rdfs:label  "constraint OoI"@en ;
+    iadopt:constrains ex:OoI ;
+  ], [
+    a           iadopt:Constraint ;
+    rdfs:label  "constraint Prop"@en ;
+    iadopt:constrains ex:Prop ;
+  ], [
+    a           iadopt:Constraint ;
+    rdfs:label  "constraint Matrix"@en ;
+    iadopt:constrains ex:Matrix ;
+  ], [
+    a           iadopt:Constraint ;
+    rdfs:label  "constraint Context"@en ;
+    iadopt:constrains ex:Context ;
+  ], [
+    a           iadopt:Constraint ;
+    rdfs:label  "constraint StatMod"@en ;
+    iadopt:constrains ex:StatMod ;
+  ]
+  .
+
+
+ex:Prop
+  a          iadopt:Property ;
+  rdfs:label "property"@en ;
+  .
+
+ex:OoI
+  a          iadopt:Entity ;
+  rdfs:label "object of interest"@en ;
+  .
+
+ex:Matrix
+  a          iadopt:Entity ;
+  rdfs:label "matrix"@en ;
+  .
+
+ex:Context
+  a          iadopt:Entity ;
+  rdfs:label "context"@en ;
+  .
+
+ex:StatMod
+  a          iadopt:StatisticalModifier ;
+  rdfs:label "statistical modifier"@en ;
   .

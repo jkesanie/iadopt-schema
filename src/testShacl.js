@@ -49,7 +49,7 @@ for( const [ type, path ] of [ ['VALID', PATH_TEST_VALID], ['INVALID', PATH_TEST
       console.table( report.results
         .map( (r) => ({
           focusNode:  shortenIRI( r.focusNode.value ),
-          message:    r.message.pop()?.value,
+          message:    r.message.pop().value,
           detail:     r.detail,
           path:       shortenIRI( r.path.value ),
           value:      r.value && shortenIRI( r.value.value ),

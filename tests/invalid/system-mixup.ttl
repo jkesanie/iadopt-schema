@@ -8,7 +8,6 @@ ex:Variable
   rdfs:label  "Testing Variable"@en ;
   iadopt:hasObjectOfInterest    ex:OoI ;
   iadopt:hasProperty            ex:Prop ;
-  iadopt:hasMatrix              ex:Matrix1, ex:Matrix2 ;
   .
 
 
@@ -18,16 +17,29 @@ ex:Prop
   .
 
 ex:OoI
-  a          iadopt:Entity ;
-  rdfs:label "object of interest"@en ;
+  a               iadopt:SymmetricSystem, iadopt:AsymmetricSystem ;
+  iadopt:hasPart  ex:SysPart1, ex:SysPart2 ;
+  iadopt:hasSource ex:Source ;
+  iadopt:hasTarget ex:Target ;
+  rdfs:label "object of interest - SymmetricSystem"@en ;
   .
 
-ex:Matrix1
+ex:SysPart1
   a          iadopt:Entity ;
-  rdfs:label "matrix 1"@en ;
+  rdfs:label "system part 1"@en ;
   .
 
-ex:Matrix2
+ex:SysPart2
   a          iadopt:Entity ;
-  rdfs:label "matrix 2"@en ;
+  rdfs:label "system part 2"@en ;
+  .
+
+ex:Source
+  a          iadopt:Entity ;
+  rdfs:label "system source"@en ;
+  .
+
+ex:Target
+  a          iadopt:Entity ;
+  rdfs:label "system target"@en ;
   .

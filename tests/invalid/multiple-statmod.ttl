@@ -8,10 +8,7 @@ ex:Variable
   rdfs:label  "Testing Variable"@en ;
   iadopt:hasObjectOfInterest    ex:OoI ;
   iadopt:hasProperty            ex:Prop ;
-  iadopt:hasConstraint [
-    a           iadopt:Constraint ;
-    rdfs:label  "constraint OoI"@en ;
-  ]
+  iadopt:hasStatisticalModifier ex:StatMod1, ex:StatMod2 ;
   .
 
 
@@ -23,4 +20,14 @@ ex:Prop
 ex:OoI
   a          iadopt:Entity ;
   rdfs:label "object of interest"@en ;
+  .
+
+ex:StatMod1
+  a          iadopt:StatisticalModifier ;
+  rdfs:label "statistical modifier 1"@en ;
+  .
+
+ex:StatMod2
+  a          iadopt:StatisticalModifier ;
+  rdfs:label "statistical modifier 2"@en ;
   .

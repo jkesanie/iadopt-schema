@@ -9,8 +9,9 @@ ex:Variable
   iadopt:hasObjectOfInterest    ex:OoI ;
   iadopt:hasProperty            ex:Prop ;
   iadopt:hasConstraint [
-    a           iadopt:Constraint ;
-    rdfs:label  "constraint OoI"@en ;
+    a                 iadopt:Constraint ;
+    rdfs:label        "constraint OoI"@en ;
+    iadopt:constrains ex:OoI, ex:somethingElse ;
   ]
   .
 

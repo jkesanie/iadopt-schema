@@ -27,6 +27,7 @@ for( const [ type, path ] of [ ['VALID', PATH_TEST_VALID], ['INVALID', PATH_TEST
     // run external SHACL validator
     // https://github.com/ISAITB/shacl-validator?tab=readme-ov-file
     // https://www.itb.ec.europa.eu/docs/guides/latest/validatingRDF/
+    // make sure TTL is valid - there will be no error emitted by the validator!
     const command = [
       'java -jar ./validator.jar ',
       `-contentToValidate ${filepath}`,
@@ -35,8 +36,19 @@ for( const [ type, path ] of [ ['VALID', PATH_TEST_VALID], ['INVALID', PATH_TEST
       '-nooutput',
       '-clireports'
     ].join( ' ' );
-    const raw = execSync( command, { cwd: PATH_ROOT, } ).toString();
-    const result = JSON.parse( raw );
+    const raw = execSync( command, {
+      cwd: PATH_ROOT,
+      stdio : 'pipe' // disables error / warning output
+    } ).toString();
+    let result;
+    try {
+      result = JSON.parse( raw );
+    } catch (_) {
+      console.log( Clc.red( '   Could not parse output - check log file!' ) );
+      console.log( Clc.red( raw ) );
+      console.log( command );
+      process.exit();
+    }
 
     // log
     if( result?.['sh:conforms']?.['@value'] === 'true' ) {
